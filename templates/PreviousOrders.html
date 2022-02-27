@@ -1,0 +1,200 @@
+<html>
+    <head>
+        <style>
+
+            body{
+                font-family: latha;
+                color: white;
+                background: linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.3), rgba(0,0,0,0)
+                )
+                    ,url(https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260)no-repeat;
+                background-size: cover;
+            }
+.box{
+    width: 1000px;
+    float: right;
+    border: 1px solid black none;
+    
+
+}
+
+.box ul li{
+    width: 180px;
+    float: left;
+    margin: 10px auto;
+    text-align: center;
+}
+
+.box ul li a{
+    text-decoration: none;
+    color: gainsboro;
+    font-size: 15px;
+}
+
+.box ul li:hover{
+    background-color: green;
+}
+
+.box ul li a:hover{
+    color: white;
+    font-size: 18px;
+}
+
+.container row{
+    width: 80%;
+
+}
+
+
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  th, td {
+    padding: 14px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    color: black;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: white;
+  }
+  h3{
+      padding: none;
+  }
+  
+tr:hover {
+    background-color:black;
+    color: white;
+    }
+
+    .dropbtn {
+        background-color: #04AA6D;
+        color: white;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        font-size: 20px;
+        border: none;
+      }
+
+      .dropbtn1 {
+        background-color: red;
+        color: white;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        font-size: 20px;
+        border: none;
+      }
+      
+      /* The container <div> - needed to position the dropdown content */
+      .dropdown {
+        position: relative;
+        display: inline-block;
+      }
+      
+      /* Dropdown Content (Hidden by Default) */
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f1f1f1;
+        min-width: 50px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+      }
+      
+      /* Links inside the dropdown */
+      .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+      }
+      
+      /* Change color of dropdown links on hover */
+      .dropdown-content a:hover {background-color: #ddd;}
+      
+      /* Show the dropdown menu on hover */
+      .dropdown:hover .dropdown-content {display: block;}
+      
+      /* Change the background color of the dropdown button when the dropdown content is shown */
+      .dropdown:hover .dropbtn {background-color: #3e8e41;}
+
+      .dropbtn:hover{
+          background-color: #3e8e41;
+      }
+    
+      a:link {
+          text-decoration: none;
+          color: lightblue;
+      }
+      a:hover{
+          color: darkblue;
+      }
+
+        </style>
+
+    </head>
+
+    <body>
+
+        <div class="box">
+            <ul type="none">
+                <li><a href = "{{ url_for('mainpage') }}">Home</a></li>
+                <li><a href = "{{ url_for('SoyaSpecials') }}">Menu</a></li>
+                <li><a href = "{{ url_for('Cart') }}">Cart({{ items_count }})</a></li>
+                <li><a href = "{{ url_for('PreviousOrders') }}">Previous Orders</a></li>
+                <li><a href = "{{ url_for('logout') }}">Logout</a></li>
+            </ul>
+        </div>
+
+        <table id = "foodCart">
+        <tr>
+            <th>Order ID</th>
+            <th>Customer ID</th>
+            <th>Customer Name</th>
+            <th>Date/ Time</th>
+            <th>Oder Details</th>
+            <th>Price</th>
+            <th>Total Price</th>
+            <th>Total Bill</th>
+        </tr>
+        
+
+        {% for i in range(orders|length) %}
+            <td>{{ orders[i]['_id'] }}</td>
+            <td>{{ orders[i]['CustomerID'] }}</td>
+            <td>{{ orders[i]['CustomerName'] }}</td>
+            <td>
+                {{ orders[i]['date'] }}
+            </td>
+            <td>
+            {% for j in range(orders[i]['Order']|length) %}
+            {{ orders[i]['Quantity'][j] }}  x  {{ orders[i]['Order'][j] }}<br><br>
+            {% endfor %}
+            </td>
+            
+            <td>
+                {% for j in range(orders[i]['Order']|length) %}
+                    ₹ {{ orders[i]['Price'][j] }}<br><br>
+                {% endfor %}
+            </td>
+            
+            <td>
+                {% for j in range(orders[i]['Order']|length) %}
+                    ₹ {{ orders[i]['TotalPrice'][j] }}<br><br>
+                {% endfor %}
+            </td>
+
+        <td>
+            ₹ {{ orders[i]['TotalBill'] }}
+        </td>
+
+    </tr>
+        {% endfor %}
+            
+    </table>
+
+    </body>
+</html>

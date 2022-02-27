@@ -1,0 +1,266 @@
+<html>
+    <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;400&family=Roboto&display=swap" rel="stylesheet">
+    
+        <style>
+
+            body{
+                font-family: latha;
+                color: white;
+                background: linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.3), rgba(0,0,0,0)
+                )
+                    ,url(https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260)no-repeat;
+                background-size: cover;
+            }
+.box{
+    width: 1000px;
+    float: right;
+    border: 1px solid black none;
+    
+
+}
+
+.box ul li{
+    width: 180px;
+    float: left;
+    margin: 10px;
+    text-align: center;
+}
+
+.box ul li a{
+    text-decoration: none;
+    color: gainsboro;
+    font-size: 25px;
+}
+
+.box ul li:hover{
+    background-color: green;
+}
+
+.box ul li a:hover{
+    color: white;
+    font-size: 25px;
+}
+
+.container row{
+    width: 80%;
+
+}
+
+
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  th, td {
+    padding: 14px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    color: black;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: white;
+  }
+  h3{
+      padding: none;
+  }
+  
+tr:hover {
+    background-color:black;
+    color: white;
+    }
+
+    .dropbtn {
+        background-color: #04AA6D;
+        color: white;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        font-size: 20px;
+        border: none;
+      }
+
+      .dropbtn1 {
+        background-color: red;
+        color: white;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        font-size: 20px;
+        border: none;
+      }
+      
+      /* The container <div> - needed to position the dropdown content */
+      .dropdown {
+        position: relative;
+        display: inline-block;
+      }
+      
+      /* Dropdown Content (Hidden by Default) */
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f1f1f1;
+        min-width: 50px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+      }
+      
+      /* Links inside the dropdown */
+      .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+      }
+      
+      /* Change color of dropdown links on hover */
+      .dropdown-content a:hover {background-color: #ddd;}
+      
+      /* Show the dropdown menu on hover */
+      .dropdown:hover .dropdown-content {display: block;}
+      
+      /* Change the background color of the dropdown button when the dropdown content is shown */
+      .dropdown:hover .dropbtn {background-color: #3e8e41;}
+
+      .dropbtn:hover{
+          background-color: #3e8e41;
+      }
+    
+      a:link {
+          text-decoration: none;
+          color: lightblue;
+      }
+      a:hover{
+          color: darkblue;
+      }
+
+        </style>
+
+    </head>
+
+    <body>
+
+        <div class="box">
+            <ul type="none">
+                <li><a href = "{{ url_for('mainpage') }}">Home</a></li>
+                <li><a href = "{{ url_for('SoyaSpecials') }}">Menu</a></li>
+                <li><a href = "{{ url_for('Cart') }}">Cart({{ items_count }})</a></li>
+                <li><a href = "{{ url_for('PreviousOrders') }}">Previous Orders</a></li>
+                <li><a href = "{{ url_for('logout') }}">Logout</a></li>
+            </ul>
+        </div>
+
+        <table id = "foodCart">
+        <tr>
+            <th>Sr</th>
+            <th>Name</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Sum</th>
+            <th></th>
+            <th></th>
+            <h2>{{ message_1 }}</h2>
+        </tr>
+        
+
+        {% for i in range(qty_list|length) %}
+            <td>{{ sr_list[i] }}</td>
+            <td>{{ order_list[i] }}</td>
+            
+
+        <form action="{{ url_for('update', id=item_id[i]) }}" method="POST">
+
+            <td> <input type="number" min="1" max="20" name='{{ item_id[i] }}' value="{{ qty_list[i] }}" min="1" max="20"> </td>
+            <td>{{ price_list[i] }}</td>
+            <td>{{ totalPrice_list[i] }}</td>
+
+            <td>
+                <button type="submit" name="updateBTN" class=dropbtn>Update</button>
+            </td>
+            <!-- <form method="GET" action="{{ url_for('updateorder') }}">
+                <button type="submit" name="updateBTN" class=dropbtn>Update</button>
+            </form>
+            <a></a> -->
+            <!-- <form action="{{ url_for('update', id=item_id[i]) }}" method = "POST"> -->
+                <td>
+                    <button type="submit" class=dropbtn1 name="deleteBTN" value="delete">Delete</button>
+                </td>
+            <!-- </form> -->
+        </form>
+
+    </tr>
+        {% endfor %}
+            
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th><h3>Total: {{ totalBill }}</h3></th>
+            <th></th>
+            <th></th>
+        </tr>
+
+        <tr></tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td>
+                <!-- <form method="GET" action="{{ url_for('updateorder') }}">
+                    <button type="submit" name="updateBTN" class=dropbtn>Update</button>
+                </form> -->
+            </td>
+            <td>
+            </td>
+            <td>
+                <h3>{{ error_1 }}</h3>
+                <div class="dropdown">
+                
+        
+                <input type = "submit" class = "dropbtn" value = "Payment method">
+                <div class="dropdown-content">
+                  <a href="#">Cash</a>
+                  <a href="#">Credit/ Debit Card</a>
+                  <a href="#">UPI</a>
+                </div>
+              </div></td>
+            
+            
+              <form method="get" action="{{ url_for('confirmorder') }}">
+                <td>
+                    <button type="submit" onclick="success()" class = dropbtn >Confirm Order</button>
+                <td>
+              </form>
+          
+                <form method="get" action="{{ url_for('cancelorder') }}">
+                    <button type="submit" onclick="cancel()" class = dropbtn >Cancel Order</button>
+                </form>
+              </td>
+            
+        </tr>
+        </table>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script type="text/javascript">
+            function success(){
+                swal({
+                    text: "Order placed successfully",
+                    icon: "success",
+                  });
+                }
+            
+            function cancel(){
+                swal({
+                    title: "Order canceled",
+                    text: "Redirecting to the main page",
+                    icon: "error"
+                  });
+            }
+        </script>
+
+
+
+    </body>
+</html>

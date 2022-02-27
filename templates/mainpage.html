@@ -1,0 +1,139 @@
+<html>
+    <head>
+
+        <style>
+
+            body{
+                font-family: latha;
+                color: white;
+                background: linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.3), rgba(0,0,0,0)
+                )
+                    ,url(https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260)no-repeat;
+                background-size: cover;
+            }
+
+            .box{
+                width: 1000px;
+                float: right;
+                border: 1px solid black none;
+                
+
+            }
+
+            .box ul li{
+                width: 140px;
+                float: left;
+                margin: 15px;
+                text-align: center;
+                font-size: 20px;
+            }
+
+            .box ul li a{
+                text-decoration: none;
+                color: gainsboro;
+
+            }
+
+            .box ul li:hover{
+                background-color: green;
+
+            }
+
+            .box ul li a:hover{
+                color: white;
+                font-size: 25px;
+            }
+
+
+            .wd{
+                width: 300px;
+                height: 600px;
+                background-color: black;
+                opacity: 0.9;
+                padding: 55px;
+                /*position: fixed;
+                left: 40%;
+                top: 10%;*/
+
+                position: absolute;
+                top:0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                
+                margin: auto;
+                border-radius: 10px;
+            }
+
+            .wd h1{
+                text-align: center;
+                text-transform: uppercase;
+                font-weight: 100;
+                font-size: 30px;
+            }
+
+            .wd h4{
+                text-align: justify;
+                color: darkgray;
+                font-weight: normal;
+                font-size: 24px;
+            }
+
+            .wd h2{
+                text-align: center;
+                text-transform: uppercase;
+                font-weight: normal;
+                margin: 40px auto;
+            }
+
+
+            .opt form, input[type="button"]{
+                background-color: black;
+                color: white;
+                padding: 10px;
+                margin: -14px auto;
+                padding-left: 50px;
+                padding-right: 50px;
+                text-align: center;
+            }
+
+            form, input[type="button"]:hover{
+                background-color: green;
+            }
+
+
+        </style>
+
+    </head>
+
+    <body>
+
+        <div class="box">
+            <ul type="none">
+                <li><a href = "{{ url_for('mainpage') }}">Home</a></li>
+                <li><a href = "{{ url_for('SoyaSpecials') }}">Menu</a></li>
+                <li><a href = "{{ url_for('Cart') }}">Cart({{ items_count }})</a></li>
+                <li><a href = "{{ url_for('PreviousOrders') }}">Previous Orders</a></li>
+                <li><a href = "{{ url_for('logout') }}">Logout</a></li>
+            </ul>
+        </div>
+
+        <div class="wd">
+            
+            <h1> Welcome, {{ session.fullname }}! </h1>
+
+            <h4>PetPooja restraunt is a take away restraunt where you can order amazing food just at a click of a button. We hope we can fulfil your expectations.</h4>
+            <br><br><br>
+            <h2> Make an order</h2>
+            <div class="opt">
+                <form action = "" method = "POST">
+
+                    <a href="{{ url_for('SoyaSpecials') }}">
+                        <input type="button" value="Order now">
+                    </a>
+                    
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
